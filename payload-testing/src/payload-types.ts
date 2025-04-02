@@ -54,6 +54,7 @@ export type SupportedTimezones =
   | 'Asia/Singapore'
   | 'Asia/Tokyo'
   | 'Asia/Seoul'
+  | 'Australia/Brisbane'
   | 'Australia/Sydney'
   | 'Pacific/Guam'
   | 'Pacific/Noumea'
@@ -148,22 +149,9 @@ export interface Page {
   id: string;
   title: string;
   hero: {
-    type: 'none' | 'highImpact' | 'mediumImpact' | 'lowImpact';
-    richText?: {
-      root: {
-        type: string;
-        children: {
-          type: string;
-          version: number;
-          [k: string]: unknown;
-        }[];
-        direction: ('ltr' | 'rtl') | null;
-        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-        indent: number;
-        version: number;
-      };
-      [k: string]: unknown;
-    } | null;
+    type: 'none' | 'highImpact' | 'mediumImpact' | 'mediumImpactAlt' | 'lowImpact';
+    title?: string | null;
+    description?: string | null;
     links?:
       | {
           link: {
@@ -188,7 +176,13 @@ export interface Page {
           id?: string | null;
         }[]
       | null;
-    media?: (string | null) | Media;
+    media1?: (string | null) | Media;
+    media2?: (string | null) | Media;
+    media3?: (string | null) | Media;
+    primaryColor?: ('yellow' | 'blue' | 'green' | 'cream') | null;
+    secondaryColor2?: ('yellow' | 'blue' | 'green' | 'cream') | null;
+    backgroundMark?: ('none' | 'type1' | 'type2') | null;
+    enableBackgroundMark2?: boolean | null;
   };
   layout: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock)[];
   meta?: {
@@ -624,6 +618,7 @@ export interface Form {
             label?: string | null;
             width?: number | null;
             defaultValue?: string | null;
+            placeholder?: string | null;
             options?:
               | {
                   label: string;
@@ -989,7 +984,8 @@ export interface PagesSelect<T extends boolean = true> {
     | T
     | {
         type?: T;
-        richText?: T;
+        title?: T;
+        description?: T;
         links?:
           | T
           | {
@@ -1005,7 +1001,13 @@ export interface PagesSelect<T extends boolean = true> {
                   };
               id?: T;
             };
-        media?: T;
+        media1?: T;
+        media2?: T;
+        media3?: T;
+        primaryColor?: T;
+        secondaryColor2?: T;
+        backgroundMark?: T;
+        enableBackgroundMark2?: T;
       };
   layout?:
     | T
@@ -1355,6 +1357,7 @@ export interface FormsSelect<T extends boolean = true> {
               label?: T;
               width?: T;
               defaultValue?: T;
+              placeholder?: T;
               options?:
                 | T
                 | {
