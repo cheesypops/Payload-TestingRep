@@ -62,6 +62,7 @@ export const Pages: CollectionConfig<'pages'> = {
       name: 'title',
       type: 'text',
       required: true,
+      label: 'Título',
     },
     {
       type: 'tabs',
@@ -75,6 +76,7 @@ export const Pages: CollectionConfig<'pages'> = {
             {
               name: 'layout',
               type: 'blocks',
+              label: 'Layout',
               blocks: [CallToAction, Content, MediaBlock, Archive, FormBlock],
               required: true,
               admin: {
@@ -115,6 +117,7 @@ export const Pages: CollectionConfig<'pages'> = {
     },
     {
       name: 'publishedAt',
+      label: 'Fecha de publicación',
       type: 'date',
       admin: {
         position: 'sidebar',
